@@ -212,7 +212,7 @@ Now, using commands itself. Let's start with a basic command.</p>
 </code></pre></div>
 <p>If you want to specify arguments, you can do it like so.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="nx">c</span><span class="p">(</span><span class="sb">`&amp;6Your arguments are: &amp;c</span><span class="si">${</span><span class="nx">args</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+    <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="nx">c</span><span class="p">(</span><span class="sb">`&amp;6Your arguments are: &amp;c</span><span class="si">${</span><span class="nx">args</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">));</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>By default, Velt processes arguments itself so that you can use quotations for arguments. You can disable this by overriding argParser.</p>
