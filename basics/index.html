@@ -117,6 +117,11 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            
+            <li class="nav-item" data-level="2"><a href="#importing-java-classes" class="nav-link">Importing Java Classes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
@@ -533,7 +538,20 @@ Here's our spawn example, but using a field.</p>
 <span class="kd">function</span> <span class="nx">removeKit</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">kits</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre></div>
+<h2 id="importing-java-classes">Importing Java Classes</h2>
+<p>With Velt, you have plenty of features built-in and easily accessible, like making commands, listening for events, equipping players with armor, saving inventories to a <code>JSON</code> file with <code>velt-storage</code>, but it doesn't support everything. Not every part of Spigot is supported with Velt, and Velt doesn't have any support for other plugins directly.</p>
+<p>Fortunately, Velt does have support for importing Java classes. Infact, it uses it directly in the source code of the core of Velt, which you can view <a href="https://github.com/Veltjs/Velt/blob/main/src/main/resources/velt.js">here</a>.</p>
+<p>There are two ways to import a Java class in Velt. The recommended approach is to use <code>Java.pkg</code> (or alternatively, <code>Java.package</code>), like so:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Player</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Java</span><span class="p">.</span><span class="nx">pkg</span><span class="p">(</span><span class="s1">&#39;org.bukkit.entity&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>There are two reasons why you should generally use <code>Java.pkg</code> over <code>Java.type</code>:
+- It makes it so you don't need to repeat the class name twice.
+- It lets you easily import multiple classes at once.</p>
+<p>The other approach, <code>Java.type</code>, lets you import a class more directly, like so:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">Player</span> <span class="o">=</span> <span class="nx">Java</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="s1">&#39;org.bukkit.entity.Player&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>Both work well, but <code>Java.pkg</code> is generally prefered.</p></div>
             </div>
         </div>
 
