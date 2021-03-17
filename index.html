@@ -80,6 +80,10 @@
             
             <li class="nav-item" data-level="1"><a href="#getting-started" class="nav-link">Getting Started</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#scripts" class="nav-link">Scripts</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
             
@@ -113,6 +117,13 @@
 <p>As Velt provides you almost the same modules as NodeJS does, many of your same npm scripts should be able to run using Velt, and you can install npm modules on Velt. 
 Velt is public and you can download it from its Github page here.</p>
 <p>You can find the latest releases to download <a href="https://github.com/Veltjs/Velt/releases">here</a>.</p>
+<h2 id="scripts">Scripts</h2>
+<p>Just as a note, scripts work a little bit differently then other plugins, like Skript.</p>
+<p>In your <code>Velt/scripts</code> folder, there are two types of scripts you can add:</p>
+<ul>
+<li><strong>Single-file scripts</strong> are scripts which are only part of one file. They're usually good for testing out things, or for simple scripts. Generally though, you'll want to split your scripts into more complex bundles.</li>
+<li><strong>Folder scripts</strong> are scripts which are part of an entire folder. They only run the main file of the folder (by default, <code>index.js</code>) but that's configurable if you add a <code>package.json</code> to it.</li>
+</ul>
 <h1 id="modules">Modules</h1>
 <p>Velt offers modules to help make your scripting easier.</p>
 <h2 id="info">Info</h2>
@@ -268,5 +279,5 @@ The two main modules in Velt are <code>velt</code> and <code>velt-helpers</code>
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-03-17 00:28:17.846880+00:00
+Build Date UTC : 2021-03-17 15:07:39.190984+00:00
 -->
