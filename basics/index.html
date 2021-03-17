@@ -40,6 +40,9 @@
                                 <a href="./" class="nav-link">Basics</a>
                             </li>
                             <li class="navitem">
+                                <a href="../docs/" class="nav-link">Docs</a>
+                            </li>
+                            <li class="navitem">
                                 <a href="../utilities/" class="nav-link">Utilities</a>
                             </li>
                         </ul>
@@ -56,7 +59,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../utilities/" class="nav-link">
+                                <a rel="next" href="../docs/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -119,6 +122,11 @@
             </li>
             
             <li class="nav-item" data-level="2"><a href="#importing-java-classes" class="nav-link">Importing Java Classes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#casting" class="nav-link">Casting</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -551,7 +559,15 @@ Here's our spawn example, but using a field.</p>
 <p>The other approach, <code>Java.type</code>, lets you import a class more directly, like so:</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">Player</span> <span class="o">=</span> <span class="nx">Java</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="s1">&#39;org.bukkit.entity.Player&#39;</span><span class="p">);</span>
 </code></pre></div>
-<p>Both work well, but <code>Java.pkg</code> is generally prefered.</p></div>
+<p>Both work well, but <code>Java.pkg</code> is generally prefered.</p>
+<h2 id="casting">Casting</h2>
+<p>Normally, you don't need to do this directly, since Velt automatically casts for you in most cases, but sometimes you might find yourself wanting to cast objects, like perhaps an object with an <code>x</code>, <code>y</code>, <code>z</code>, and <code>world</code> to a location to teleport an entity to. To do that, you could make some complex function to handle it, or let Velt do it for you.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">loc</span> <span class="o">=</span> <span class="nx">cast</span><span class="p">.</span><span class="nx">asLocation</span><span class="p">({</span> <span class="nx">x</span>: <span class="kt">1</span><span class="p">,</span> <span class="nx">y</span>: <span class="kt">2</span><span class="p">,</span> <span class="nx">z</span>: <span class="kt">3</span><span class="p">,</span> <span class="nx">world</span><span class="o">:</span> <span class="s1">&#39;world&#39;</span> <span class="p">});</span>
+</code></pre></div>
+<p>One of the most important use-cases of this would be to convert some text to a player, like so:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">cast</span><span class="p">.</span><span class="nx">asPlayer</span><span class="p">(</span><span class="s1">&#39;Cormans&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>Casting is an important part of Velt, and it's a feature that when necessary, you should make use of.</p></div>
             </div>
         </div>
 
