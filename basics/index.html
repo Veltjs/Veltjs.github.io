@@ -397,6 +397,26 @@ Now, using commands itself. Let's start with a basic command.</p>
     <span class="nx">movable</span>: <span class="kt">true</span>
 <span class="p">});</span>
 </code></pre></div>
+<p>Finally, one extra thing to note is that you can specify to get the event when listening for a callback with a GUI. This can be useful for doing different things depending on the click type, as demonstrated below:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">gui</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;stone block&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">movable</span>: <span class="kt">false</span><span class="p">,</span> <span class="c1">// InventoryInteractEvent is cancelled</span>
+  <span class="nx">close</span>: <span class="kt">true</span><span class="p">,</span> <span class="c1">//Make it close after clicking it</span>
+  <span class="nx">run</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">clickType</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">getClick</span><span class="p">().</span><span class="nx">name</span><span class="p">();</span>
+    <span class="k">switch</span><span class="p">(</span><span class="nx">clickType</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s1">&#39;DROP&#39;</span><span class="o">:</span>
+            <span class="nx">server</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">(</span><span class="s1">&#39;This item has been dropped!&#39;</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s1">&#39;LEFT&#39;</span><span class="o">:</span>
+        <span class="k">case</span> <span class="s1">&#39;RIGHT&#39;</span><span class="o">:</span>
+            <span class="nx">server</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">(</span><span class="s1">&#39;This has been left/right clicked.&#39;</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="k">default</span><span class="o">:</span>
+            <span class="nx">server</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">(</span><span class="s1">&#39;Something else happened, huh.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
 <h2 id="utilizing-scoreboards">Utilizing Scoreboards</h2>
 <p>Scoreboards is yet another helper class from the velt-helpers module, so to use scoreboards you will need to import Scoreboard from the velt-helpers module like so.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Scoreboard</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt-helpers&#39;</span><span class="p">);</span>
