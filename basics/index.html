@@ -138,17 +138,17 @@
 <h2 id="the-basics">The Basics</h2>
 <p>Handling the implementations of basic features like commands in Velt.</p>
 <h2 id="commands">Commands</h2>
-<p>As you saw in the modules section, the <code>velt</code> module can be used to create commands. The velt module offers a few helpful variables. The one we'll mainly be looking at is <code>server</code>, as it offers direct control over handling commands and events.
+<p>As you saw in the modules section, the <code>velt</code> module can be used to create commands. The velt module offers a few helpful variables. The one we'll mainly be looking at is <code>commands</code>, as it offers direct control over handling commands.
 The other function we'll be needing is <code>color</code>, which has the alias of <code>c</code>. This turns a string such as <code>&amp;6Abcd</code> to a colored string with the text <code>Abcd</code> in gold. The following import will allow you to get both the server object and the color function. </p>
-<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">server</span><span class="p">,</span> <span class="nx">c</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">commands</span><span class="p">,</span> <span class="nx">c</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
 </code></pre></div>
-<p><code>server.createCommand</code> has multiple usages, shown below:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-<span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
-<span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span> <span class="c1">//Takes command name from callback function name.</span>
-<span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-<span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
-<span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+<p><code>commands.create</code> has multiple usages, shown below:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span> <span class="c1">//Takes command name from callback function name.</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 </code></pre></div>
 <p>The following options can be used:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -166,19 +166,19 @@ The other function we'll be needing is <code>color</code>, which has the alias o
 <span class="p">}</span>
 </code></pre></div>
 <p>However, you can also chain callback and tabComplete if needed. This allows for the following to be valid.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">run</span><span class="p">((</span><span class="nx">sender</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">run</span><span class="p">((</span><span class="nx">sender</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;Hello!&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>Although that is generally not the recommended approach. A better approach would be this:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;Hello!&#39;</span><span class="p">);</span>
 <span class="p">}).</span><span class="nx">tabComplete</span><span class="p">((</span><span class="nx">sender</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;tabCompleted&#39;</span><span class="p">];</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>However in that case, the recommended approach would be using options for that.
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">run</span><span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;Hello!&#39;</span><span class="p">);</span>       
     <span class="p">},</span> 
@@ -189,12 +189,12 @@ The other function we'll be needing is <code>color</code>, which has the alias o
 </code></pre></div></p>
 <p>This allows for a clear and readable way to show your callback and tab completion.
 Now, using commands itself. Let's start with a basic command.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="c1">//You can ignore specifying arguments if they aren&#39;t needed</span>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="c1">//You can ignore specifying arguments if they aren&#39;t needed</span>
     <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>The above command is great, but it doesn't really do much. Let's try using something that might be more useful.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;feed&#39;</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;feed&#39;</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">permission</span><span class="o">:</span> <span class="s1">&#39;velt.feed&#39;</span>
 <span class="p">},</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">sender</span><span class="p">.</span><span class="nx">setFoodLevel</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
@@ -202,7 +202,7 @@ Now, using commands itself. Let's start with a basic command.</p>
 <span class="p">});</span>
 </code></pre></div>
 <p>However, this won't work if the sender is a console. There are two ways to account for this. Firstly, you can manually block the console from running the command like so.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;feed&#39;</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;feed&#39;</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">permission</span><span class="o">:</span> <span class="s1">&#39;velt.feed&#39;</span>
 <span class="p">},</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">manager</span><span class="p">.</span><span class="nx">isConsole</span><span class="p">(</span><span class="nx">sender</span><span class="p">))</span> <span class="p">{</span>
@@ -215,7 +215,7 @@ Now, using commands itself. Let's start with a basic command.</p>
 <span class="p">});</span>
 </code></pre></div>
 <p>The alternative is to specify this in your options, which is generally the preferred way.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;feed&#39;</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;feed&#39;</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">permission</span><span class="o">:</span> <span class="s1">&#39;velt.feed&#39;</span><span class="p">,</span>
     <span class="nx">playerOnly</span>: <span class="kt">c</span><span class="p">(</span><span class="s1">&#39;&amp;cOnly players can run the feed command&#39;</span><span class="p">)</span>
 <span class="p">},</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -224,12 +224,12 @@ Now, using commands itself. Let's start with a basic command.</p>
 <span class="p">});</span>
 </code></pre></div>
 <p>If you want to specify arguments, you can do it like so.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="nx">c</span><span class="p">(</span><span class="sb">`&amp;6Your arguments are: &amp;c</span><span class="si">${</span><span class="nx">args</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">));</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>By default, Velt processes arguments itself so that you can use quotations for arguments. You can disable this by overriding argParser.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">argParser</span>: <span class="kt">null</span> <span class="c1">//Use minecraft&#39;s default arg parsing.</span>
 <span class="p">},</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;This is a command&#39;</span><span class="p">);</span>
@@ -237,35 +237,35 @@ Now, using commands itself. Let's start with a basic command.</p>
 </code></pre></div>
 <p>Now, you can use Minecraft's builtin command system without support for arguments with over a space.</p>
 <h2 id="events">Events</h2>
-<p>As you know, the <code>server</code> variable from the velt module handles broadcasting, scheduling, callbacks, commands and events. Events are essential to scripting powerful scripts in Minecraft, since they allow you to handle everything that happens in your server, from a player chatting, to every single mob that spawns, to when a player right clicks their mouse, events are for handling it.</p>
+<p>As you know, the <code>events</code> variable handles everything to do with events in Velt. Events are essential to scripting powerful scripts in Minecraft, since they allow you to handle everything that happens in your server, from a player chatting, to every single mob that spawns, to when a player right clicks their mouse, events are for handling it.</p>
 <p>The main way for you to handle your events is using the manager.on function, which takes in the event name, and a callback which handles the event.</p>
-<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">server</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">events</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
 
-<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;AsyncPlayerChatEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;AsyncPlayerChatEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">event</span><span class="p">.</span><span class="nx">setFormat</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">event</span><span class="p">.</span><span class="nx">getPlayer</span><span class="p">().</span><span class="nx">getDisplayName</span><span class="p">()</span><span class="si">}</span><span class="sb"> &gt; </span><span class="si">${</span><span class="nx">event</span><span class="p">.</span><span class="nx">getMessage</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>Above is a basic example of how to use events in Velt. You can handle any Spigot event and even events from other plugins.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;PlayerJoinEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;PlayerJoinEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">event</span><span class="p">.</span><span class="nx">setJoinMessage</span><span class="p">(</span><span class="sb">`[+] </span><span class="si">${</span><span class="nx">event</span><span class="p">.</span><span class="nx">getPlayer</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>Something to note is that there can be multiple event handlers listening for a callback, and that you can close event handlers.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nx">handler</span> <span class="o">=</span> <span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;PlayerJoinEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nx">handler</span> <span class="o">=</span> <span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;PlayerJoinEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">event</span><span class="p">.</span><span class="nx">setJoinMessage</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">event</span><span class="p">.</span><span class="nx">getPlayer</span><span class="p">()</span><span class="si">}</span><span class="sb"> has joined.`</span><span class="p">);</span>
     <span class="nx">handler</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>Another way to listen for events is server.once, which will listen for a single event.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;PlayerJoinEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<p>Another way to listen for events is events.once, which will listen for a single event.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;PlayerJoinEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">event</span><span class="p">.</span><span class="nx">setJoinMessage</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">event</span><span class="p">.</span><span class="nx">getPlayer</span><span class="p">()</span><span class="si">}</span><span class="sb"> has joined.`</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>However, one of the best ways to listen for events is using server.waitFor, which will return a promise that resolves when the event that matches the condition is detected. This can be extremely useful for detecting events within your code, and can simplify your scripts heavily, especially when combined with JavaScript's async-await syntax.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="nx">async</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<p>However, one of the best ways to listen for events is using events.once, which will return a promise that resolves when the event that matches the condition is detected. This can be extremely useful for detecting events within your code, and can simplify your scripts heavily, especially when combined with JavaScript's async-await syntax.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="nx">async</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;Tell me hello.&#39;</span><span class="p">);</span>
     <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">server</span><span class="p">.</span><span class="nx">waitFor</span><span class="p">(</span><span class="s1">&#39;AsyncPlayerChatEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="nx">event</span><span class="p">.</span><span class="nx">getPlayer</span><span class="p">()</span> <span class="o">===</span> <span class="nx">sender</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">events</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;AsyncPlayerChatEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="nx">event</span><span class="p">.</span><span class="nx">getPlayer</span><span class="p">()</span> <span class="o">===</span> <span class="nx">sender</span><span class="p">);</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">getMessage</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;hello&#39;</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;Good job.&#39;</span><span class="p">);</span>
             <span class="nx">event</span><span class="p">.</span><span class="nx">setCancelled</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
@@ -493,10 +493,10 @@ Now, using commands itself. Let's start with a basic command.</p>
 <span class="nx">storage</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span> <span class="nx">hello</span><span class="o">:</span> <span class="s1">&#39;world&#39;</span> <span class="p">});</span> <span class="c1">//Sets the value of the storage</span>
 </code></pre></div>
 <p>Here's an example of a spawn command, and a setspawn command.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">storage</span><span class="p">.</span><span class="nx">get</span><span class="p">()[</span><span class="s1">&#39;spawn&#39;</span><span class="p">].</span><span class="nx">teleport</span><span class="p">(</span><span class="nx">sender</span><span class="p">);</span>
 <span class="p">});</span>
-<span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;setspawn&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;setspawn&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">storage</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span> <span class="p">...</span><span class="nx">storage</span><span class="p">.</span><span class="nx">get</span><span class="p">(),</span> <span class="nx">spawn</span>: <span class="kt">sender.getLocation</span><span class="p">()</span> <span class="p">});</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -518,11 +518,11 @@ Now, using commands itself. Let's start with a basic command.</p>
 Here's our spawn example, but using a field.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">spawn</span> <span class="o">=</span> <span class="nx">storage</span><span class="p">.</span><span class="nx">field</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">);</span>
 
-<span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">spawn</span><span class="p">.</span><span class="nx">get</span><span class="p">().</span><span class="nx">teleport</span><span class="p">(</span><span class="nx">sender</span><span class="p">);</span>
 <span class="p">});</span>
 
-<span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;setspawn&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;setspawn&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">spawn</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">sender</span><span class="p">.</span><span class="nx">getLocation</span><span class="p">());</span>
 <span class="p">});</span>
 </code></pre></div>

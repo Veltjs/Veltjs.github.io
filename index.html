@@ -143,8 +143,20 @@ The two main modules in Velt are <code>velt</code> and <code>velt-helpers</code>
 </thead>
 <tbody>
 <tr>
+<td>events</td>
+<td>The <code>events</code> variable allows you to listen for events asynchronously or not.</td>
+</tr>
+<tr>
+<td>commands</td>
+<td>The <code>commands</code> variable allows you to handle commands, subcommands, permissions, etc.</td>
+</tr>
+<tr>
 <td>server</td>
-<td>The <code>server</code> variable allows for handling callbacks, specifically commands and events, alongside helpful functions to do specific tasks like getting an array of worlds, broadcasting a message, etc</td>
+<td>The <code>server</code> variable contains helpful functions to do specific tasks like getting an array of worlds, broadcasting a message, etc</td>
+</tr>
+<tr>
+<td>script</td>
+<td>The <code>script</code> variable contains a method especially useful for storing data no matter the server.</td>
 </tr>
 <tr>
 <td>cast</td>
@@ -152,16 +164,16 @@ The two main modules in Velt are <code>velt</code> and <code>velt-helpers</code>
 </tr>
 </tbody>
 </table>
-<p>Below is an example of using the <code>server</code> variable of velt.</p>
-<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">server</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
+<p>Below is an example of using the <code>commands</code> and <code>events</code> variable of velt.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">commands</span><span class="p">,</span> <span class="nx">events</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
 
-<span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">playerOnly</span><span class="o">:</span> <span class="s1">&#39;Only players can run this&#39;</span>
 <span class="p">},</span> <span class="nx">async</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;Tell me &quot;hello&quot;!&#39;</span><span class="p">);</span>
     <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">//manager.waitFor allows asynchronously for us to wait for an event that matches the condition.</span>
-        <span class="kd">let</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">server</span><span class="p">.</span><span class="nx">waitFor</span><span class="p">(</span><span class="s1">&#39;AsyncPlayerChatEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="nx">event</span><span class="p">.</span><span class="nx">getPlayer</span><span class="p">()</span> <span class="o">===</span> <span class="nx">sender</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">events</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;AsyncPlayerChatEvent&#39;</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="nx">event</span><span class="p">.</span><span class="nx">getPlayer</span><span class="p">()</span> <span class="o">===</span> <span class="nx">sender</span><span class="p">);</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">getMessage</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;hello&#39;</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;Good job.&#39;</span><span class="p">);</span>
             <span class="nx">event</span><span class="p">.</span><span class="nx">setCancelled</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
@@ -175,10 +187,10 @@ The two main modules in Velt are <code>velt</code> and <code>velt-helpers</code>
 </code></pre></div>
 <h2 id="the-velt-helpers-module">The velt-helpers module</h2>
 <p>The <code>velt-helpers</code> module offers classes which can help make your code easier to read and more concise. Below is an example of using the Gui class of <code>velt-helpers</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">server</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">commands</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">Gui</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt-helpers&#39;</span><span class="p">);</span>
 
-<span class="nx">server</span><span class="p">.</span><span class="nx">createCommand</span><span class="p">(</span><span class="s1">&#39;showgui&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;showgui&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">manager</span><span class="p">.</span><span class="nx">isConsole</span><span class="p">(</span><span class="nx">sender</span><span class="p">))</span> <span class="p">{</span>
         <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;Only players can run this&#39;</span><span class="p">);</span>
         <span class="k">return</span><span class="p">;</span>
@@ -282,5 +294,5 @@ The two main modules in Velt are <code>velt</code> and <code>velt-helpers</code>
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-03-19 01:52:59.403536+00:00
+Build Date UTC : 2021-03-21 06:20:21.861907+00:00
 -->
