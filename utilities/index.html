@@ -101,12 +101,12 @@
                     <div class="col-md-9" role="main">
 
 <h2 id="utilities">Utilities</h2>
-<p>Some utilities which aren't necessarily as essential as the core parts of <code>velt</code>, or some of the more useful parts of <code>velt-helpers</code>, but can definitely still be very useful depending on what you're using them for.</p>
+<p>Some utilities which aren't necessarily as essential as the core parts of <code>velt</code>, or some of the more useful parts of <code>velt/helpers</code>, but can definitely still be very useful depending on what you're using them for.</p>
 <h2 id="creating-custom-mobs">Creating Custom Mobs</h2>
 <p>Firstly, a clarification. Velt does not allow you to create entirely new mobs with new sound effects and textures, but it does allow you to remix existing mobs to what you want, like a zombie with 50 health and runs twice as fast.</p>
 <p>Firstly, let's take a look at the following example:</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">server</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">equip</span><span class="p">,</span> <span class="nx">effect</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt-helpers&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">equip</span><span class="p">,</span> <span class="nx">effect</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt/helpers&#39;</span><span class="p">);</span>
 
 <span class="c1">//Assume loc is already defined, and spawn a zombie with some armor and speed.</span>
 <span class="kr">const</span> <span class="nx">zombie</span> <span class="o">=</span> <span class="nx">server</span><span class="p">.</span><span class="nx">summon</span><span class="p">(</span><span class="s1">&#39;zombie&#39;</span><span class="p">,</span> <span class="nx">loc</span><span class="p">);</span>
@@ -163,7 +163,7 @@
 <p>Firstly, just to clarify, the custom items you can make in Velt aren't new items with new textures and sounds, but just adding in new features to existing items with specific names and properties.
 To start, what if you wanted to implement a stick with a special name that lets you shoot a fireball when you right click it? Velt custom items would be the way to go.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">c</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">Item</span><span class="p">,</span> <span class="nx">shoot</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt-helpers&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">Item</span><span class="p">,</span> <span class="nx">shoot</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt/helpers&#39;</span><span class="p">);</span>
 
 <span class="k">new</span> <span class="nx">Item</span><span class="p">({</span>
     <span class="nx">name</span>: <span class="kt">c</span><span class="sb">`Fireball Shooter`</span><span class="p">,</span>

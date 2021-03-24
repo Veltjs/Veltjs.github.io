@@ -81,52 +81,68 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#the-basics" class="nav-link">The Basics</a>
+            <li class="nav-item" data-level="1"><a href="#the-basics" class="nav-link">The Basics</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#commands" class="nav-link">Commands</a>
+            <li class="nav-item" data-level="1"><a href="#commands" class="nav-link">Commands</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#sub-commands" class="nav-link">Sub Commands</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#argument-types" class="nav-link">Argument Types</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#events" class="nav-link">Events</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#events" class="nav-link">Events</a>
+            <li class="nav-item" data-level="1"><a href="#scheduling-tasks" class="nav-link">Scheduling Tasks</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#normal-tasks" class="nav-link">Normal Tasks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#looping-tasks" class="nav-link">Looping Tasks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#creating-configs" class="nav-link">Creating Configs</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#scheduling-tasks" class="nav-link">Scheduling Tasks</a>
+            <li class="nav-item" data-level="1"><a href="#creating-guis" class="nav-link">Creating GUIs</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#creating-configs" class="nav-link">Creating Configs</a>
+            <li class="nav-item" data-level="1"><a href="#utilizing-scoreboards" class="nav-link">Utilizing Scoreboards</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#creating-guis" class="nav-link">Creating GUIs</a>
+            <li class="nav-item" data-level="1"><a href="#making-use-of-storage" class="nav-link">Making Use of Storage</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#utilizing-scoreboards" class="nav-link">Utilizing Scoreboards</a>
+            <li class="nav-item" data-level="1"><a href="#importing-java-classes" class="nav-link">Importing Java Classes</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#making-use-of-storage" class="nav-link">Making Use of Storage</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="2"><a href="#importing-java-classes" class="nav-link">Importing Java Classes</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="2"><a href="#casting" class="nav-link">Casting</a>
+            <li class="nav-item" data-level="1"><a href="#casting" class="nav-link">Casting</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -135,9 +151,9 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h2 id="the-basics">The Basics</h2>
+<h1 id="the-basics">The Basics</h1>
 <p>Handling the implementations of basic features like commands in Velt.</p>
-<h2 id="commands">Commands</h2>
+<h1 id="commands">Commands</h1>
 <p>As you saw in the modules section, the <code>velt</code> module can be used to create commands. The velt module offers a few helpful variables. The one we'll mainly be looking at is <code>commands</code>, as it offers direct control over handling commands.
 The other function we'll be needing is <code>color</code>, which has the alias of <code>c</code>. This turns a string such as <code>&amp;6Abcd</code> to a colored string with the text <code>Abcd</code> in gold. The following import will allow you to get both the server object and the color function. </p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">commands</span><span class="p">,</span> <span class="nx">c</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
@@ -235,8 +251,94 @@ Now, using commands itself. Let's start with a basic command.</p>
     <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;This is a command&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>Now, you can use Minecraft's builtin command system without support for arguments with over a space.</p>
-<h2 id="events">Events</h2>
+<p>Now, you can use Minecraft's builtin command system without support for arguments with over a space. However, there's a little bit more.</p>
+<h2 id="sub-commands">Sub Commands</h2>
+<p>With the release of <code>0.1.0</code>, Velt has a feature which makes it incredibly easy to create sub-commands. From this:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">cm</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s1">&#39;sub&#39;</span><span class="o">:</span>
+            <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;Nice sub-command you got there!&#39;</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s1">&#39;f&#39;</span><span class="o">:</span>
+            <span class="nx">sender</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>To this:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">subs</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">sub</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="s1">&#39;Nice sub-command you got there!&#39;</span><span class="p">,</span>
+        <span class="nx">f</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="s1">&#39;f&#39;</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>Sub-commands are just like commands. They support most of the same options, and even can have their own inner-sub commands!</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;sub&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">subs</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">inner</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">subs</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">bro</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="s1">&#39;I am a sub-command in a sub-command at /sub inner bro&#39;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>You can have them tab-complete, only work with specific permissions, and only for reg players, and more.</p>
+<h2 id="argument-types">Argument Types</h2>
+<p>With the new <code>0.1.1</code> update, Velt has a new feature for command arguments. Before, where you had to manually check if an arg was a type and specify tab completions depending on arg length, now you can just specify an arg-type.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;add (number) (number)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="sb">`Result: </span><span class="si">${</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="c1">//Alternatively</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">args</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;number&#39;</span> <span class="p">],</span>
+    <span class="nx">run</span><span class="o">:</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="sb">`Result: </span><span class="si">${</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="si">}</span><span class="sb">`</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Arg-types are backwards compatible with any commands without them, but they're an incredibly useful tool. You can also have optional args:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;tp (player) (player?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">player</span><span class="p">,</span> <span class="nx">other</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">other</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">player</span><span class="p">.</span><span class="nx">teleport</span><span class="p">(</span><span class="nx">other</span><span class="p">);</span>
+        <span class="k">return</span> <span class="sb">`You have teleported </span><span class="si">${</span><span class="nx">player</span><span class="si">}</span><span class="sb"> to </span><span class="si">${</span><span class="nx">other</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">sender</span><span class="p">.</span><span class="nx">teleport</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span>
+        <span class="k">return</span> <span class="sb">`You have teleported to </span><span class="si">${</span><span class="nx">player</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>You can also have <code>spread</code> args:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;tphere (...player)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="p">...</span><span class="nx">players</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">player</span> <span class="k">of</span> <span class="nx">players</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">player</span><span class="p">.</span><span class="nx">teleport</span><span class="p">(</span><span class="nx">sender</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Arg-types also work with sub-commands:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;math&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">subs</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">&#39;add (number) (number)&#39;</span><span class="o">:</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="sb">`Result: </span><span class="si">${</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+        <span class="s1">&#39;mul (number) (number)&#39;</span><span class="o">:</span> <span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="sb">`Result: </span><span class="si">${</span><span class="nx">x</span> <span class="o">*</span> <span class="nx">y</span><span class="si">}</span><span class="sb">`</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>You can also make your own arg-types. These are the default ones supported:</p>
+<div class="highlight"><pre><span></span><code>text
+integer
+number
+boolean
+player
+</code></pre></div>
+<p>Here's how to make your own:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">commands</span><span class="p">.</span><span class="nx">createListType</span><span class="p">(</span><span class="s1">&#39;snack&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;chips&#39;</span><span class="p">,</span> <span class="s1">&#39;cookies&#39;</span><span class="p">,</span> <span class="s1">&#39;donuts&#39;</span> <span class="p">]);</span> <span class="c1">//Simple list types</span>
+<span class="nx">commands</span><span class="p">.</span><span class="nx">createType</span><span class="p">(</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">match</span><span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">arg</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+        <span class="kr">const</span> <span class="nx">parsed</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">arg</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">parsed</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">arg</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">parsed</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<h1 id="events">Events</h1>
 <p>As you know, the <code>events</code> variable handles everything to do with events in Velt. Events are essential to scripting powerful scripts in Minecraft, since they allow you to handle everything that happens in your server, from a player chatting, to every single mob that spawns, to when a player right clicks their mouse, events are for handling it.</p>
 <p>The main way for you to handle your events is using the manager.on function, which takes in the event name, and a callback which handles the event.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">events</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
@@ -277,9 +379,9 @@ Now, using commands itself. Let's start with a basic command.</p>
     <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
-<h2 id="scheduling-tasks">Scheduling Tasks</h2>
+<h1 id="scheduling-tasks">Scheduling Tasks</h1>
 <p>To start, you'll need to import the <code>server</code> variable from the <code>velt</code> module.</p>
-<h6 id="normal-tasks">Normal Tasks</h6>
+<h2 id="normal-tasks">Normal Tasks</h2>
 <p>Velt allows you to schedule both normal tasks and looping tasks. Normal tasks can be scheduled with a promise.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="c1">//Run after 5 ticks</span>
@@ -297,7 +399,7 @@ Now, using commands itself. Let's start with a basic command.</p>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Run 1 second after the 5 ticks were waited&#39;</span><span class="p">);</span>
 <span class="p">})();</span>
 </code></pre></div>
-<h6 id="looping-tasks">Looping Tasks</h6>
+<h2 id="looping-tasks">Looping Tasks</h2>
 <p>Periodic tasks, or looping tasks, can also be scheduled in a similar way, except using a single callback and not a promise.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">server</span><span class="p">.</span><span class="nx">schedule</span><span class="p">({</span> <span class="nx">seconds</span>: <span class="kt">1</span> <span class="p">},</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;This is called every second&#39;</span><span class="p">);</span>
@@ -320,9 +422,9 @@ Now, using commands itself. Let's start with a basic command.</p>
     <span class="p">}</span>
 <span class="p">})();</span>
 </code></pre></div>
-<h2 id="creating-configs">Creating Configs</h2>
-<p>You'll need to import <code>Storage</code> from velt-helpers.</p>
-<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Storage</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt-storage&#39;</span><span class="p">);</span>
+<h1 id="creating-configs">Creating Configs</h1>
+<p>You'll need to import <code>Storage</code> from velt/helpers.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Storage</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt/storage&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>Velt can save configurations to JSON and YAML, which can either be manually specified, or defaults to the file extension.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">//Create a config from the ./config.yml file.</span>
@@ -354,9 +456,9 @@ Now, using commands itself. Let's start with a basic command.</p>
 <span class="c1">//Save the config at a specific path with a specific type</span>
 <span class="nx">config</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="s1">&#39;config.yml&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;json&#39;</span><span class="p">});</span>
 </code></pre></div>
-<h2 id="creating-guis">Creating GUIs</h2>
-<p>With Velt, you can make powerful, effective GUIs with very little code using Velt's utility module, <code>velt-helpers</code>. For GUI creation, you need to import the <code>Gui</code> class.</p>
-<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Gui</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt-helpers&#39;</span><span class="p">);</span>
+<h1 id="creating-guis">Creating GUIs</h1>
+<p>With Velt, you can make powerful, effective GUIs with very little code using Velt's utility module, <code>velt/helpers</code>. For GUI creation, you need to import the <code>Gui</code> class.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Gui</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt/helpers&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>Next, create your GUI by initializing it with the name, and number of rows.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">gui</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gui</span><span class="p">(</span><span class="s1">&#39;My GUI&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
@@ -417,9 +519,9 @@ Now, using commands itself. Let's start with a basic command.</p>
   <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
-<h2 id="utilizing-scoreboards">Utilizing Scoreboards</h2>
-<p>Scoreboards is yet another helper class from the velt-helpers module, so to use scoreboards you will need to import Scoreboard from the velt-helpers module like so.</p>
-<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Scoreboard</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt-helpers&#39;</span><span class="p">);</span>
+<h1 id="utilizing-scoreboards">Utilizing Scoreboards</h1>
+<p>Scoreboards is yet another helper class from the velt/helpers module, so to use scoreboards you will need to import Scoreboard from the velt/helpers module like so.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Scoreboard</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt/helpers&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>Scoreboards can be initialized in several ways, using a list, or using an object with key-value pairs, or using method chaining.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">//Explicit scoreboard setting example</span>
@@ -480,10 +582,10 @@ Now, using commands itself. Let's start with a basic command.</p>
     <span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Second Value&#39;</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span>
 </code></pre></div>
-<h2 id="making-use-of-storage">Making Use of Storage</h2>
+<h1 id="making-use-of-storage">Making Use of Storage</h1>
 <p>Storage is by far one of the most useful features in Velt, as a lot of the time you need to store data across restarts and variables just won't cut it. Storage allows for getting and setting individual fields of JSON files, YAML files (to come), and databases entirely at some point.</p>
-<p>Firstly, you need to import the Storage class from <code>velt-storage</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Storage</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt-storage&#39;</span><span class="p">);</span>
+<p>Firstly, you need to import the Storage class from <code>velt/storage</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Storage</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt/storage&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>Storage can be created from a file as its path.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">storage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Storage</span><span class="p">(</span><span class="s1">&#39;./data.json&#39;</span><span class="p">);</span>
@@ -567,8 +669,8 @@ Here's our spawn example, but using a field.</p>
     <span class="nx">kits</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="importing-java-classes">Importing Java Classes</h2>
-<p>With Velt, you have plenty of features built-in and easily accessible, like making commands, listening for events, equipping players with armor, saving inventories to a <code>JSON</code> file with <code>velt-storage</code>, but it doesn't support everything. Not every part of Spigot is supported with Velt, and Velt doesn't have any support for other plugins directly.</p>
+<h1 id="importing-java-classes">Importing Java Classes</h1>
+<p>With Velt, you have plenty of features built-in and easily accessible, like making commands, listening for events, equipping players with armor, saving inventories to a <code>JSON</code> file with <code>velt/storage</code>, but it doesn't support everything. Not every part of Spigot is supported with Velt, and Velt doesn't have any support for other plugins directly.</p>
 <p>Fortunately, Velt does have support for importing Java classes. Infact, it uses it directly in the source code of the core of Velt, which you can view <a href="https://github.com/Veltjs/Velt/blob/main/src/main/resources/velt.js">here</a>.</p>
 <p>There are two ways to import a Java class in Velt. The recommended approach is to use <code>Java.pkg</code> (or alternatively, <code>Java.package</code>), like so:</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Player</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">Java</span><span class="p">.</span><span class="nx">pkg</span><span class="p">(</span><span class="s1">&#39;org.bukkit.entity&#39;</span><span class="p">);</span>
@@ -580,7 +682,7 @@ Here's our spawn example, but using a field.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">Player</span> <span class="o">=</span> <span class="nx">Java</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="s1">&#39;org.bukkit.entity.Player&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>Both work well, but <code>Java.pkg</code> is generally prefered.</p>
-<h2 id="casting">Casting</h2>
+<h1 id="casting">Casting</h1>
 <p>Normally, you don't need to do this directly, since Velt automatically casts for you in most cases, but sometimes you might find yourself wanting to cast objects, like perhaps an object with an <code>x</code>, <code>y</code>, <code>z</code>, and <code>world</code> to a location to teleport an entity to. To do that, you could make some complex function to handle it, or let Velt do it for you.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">loc</span> <span class="o">=</span> <span class="nx">cast</span><span class="p">.</span><span class="nx">asLocation</span><span class="p">({</span> <span class="nx">x</span>: <span class="kt">1</span><span class="p">,</span> <span class="nx">y</span>: <span class="kt">2</span><span class="p">,</span> <span class="nx">z</span>: <span class="kt">3</span><span class="p">,</span> <span class="nx">world</span><span class="o">:</span> <span class="s1">&#39;world&#39;</span> <span class="p">});</span>
 </code></pre></div>

@@ -100,7 +100,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#the-velt-helpers-module" class="nav-link">The velt-helpers module</a>
+            <li class="nav-item" data-level="2"><a href="#the-velthelpers-module" class="nav-link">The velt/helpers module</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -131,7 +131,7 @@ Velt is public and you can download it from its Github page here.</p>
 <p>Velt offers modules to help make your scripting easier.</p>
 <h2 id="info">Info</h2>
 <p>Velt offers the same require syntax which is used in Node to import modules. Velt also offers many node modules which you can use, as one of Velt's goals is for you to be able to run node scripts and modules in Velt just fine.
-The two main modules in Velt are <code>velt</code> and <code>velt-helpers</code>.</p>
+The two main modules in Velt are <code>velt</code> and <code>velt/helpers</code>.</p>
 <h2 id="the-velt-module">The velt module</h2>
 <p>The <code>velt</code> module is the main module for you to use, offering variables that you can utilize to make powerful scripts. Below is a list of variables the module offers.</p>
 <table>
@@ -185,10 +185,10 @@ The two main modules in Velt are <code>velt</code> and <code>velt-helpers</code>
     <span class="p">}</span>  
 <span class="p">});</span>
 </code></pre></div>
-<h2 id="the-velt-helpers-module">The velt-helpers module</h2>
-<p>The <code>velt-helpers</code> module offers classes which can help make your code easier to read and more concise. Below is an example of using the Gui class of <code>velt-helpers</code>.</p>
+<h2 id="the-velthelpers-module">The velt/helpers module</h2>
+<p>The <code>velt/helpers</code> module offers classes which can help make your code easier to read and more concise. Below is an example of using the Gui class of <code>velt/helpers</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">commands</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt&#39;</span><span class="p">);</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">Gui</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt-helpers&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">Gui</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;velt/helpers&#39;</span><span class="p">);</span>
 
 <span class="nx">commands</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;showgui&#39;</span><span class="p">,</span> <span class="nx">sender</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">manager</span><span class="p">.</span><span class="nx">isConsole</span><span class="p">(</span><span class="nx">sender</span><span class="p">))</span> <span class="p">{</span>
@@ -294,5 +294,5 @@ The two main modules in Velt are <code>velt</code> and <code>velt-helpers</code>
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-03-21 06:20:21.861907+00:00
+Build Date UTC : 2021-03-24 03:33:38.470674+00:00
 -->
